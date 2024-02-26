@@ -9,8 +9,8 @@ import Footer from './components/Footer.jsx';
 function App() {
   const [selectedTopic, setSelectedTopic] = useState();
 
-  function handleSelect(selectedButton) {
-    setSelectedTopic(selectedButton);
+  function handleSelect(topic) {
+    setSelectedTopic(topic);
   }
 
   let tabContent = <p>Please select a topic.</p>;
