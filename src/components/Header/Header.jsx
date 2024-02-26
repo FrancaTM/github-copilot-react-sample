@@ -3,8 +3,13 @@ import './Header.css';
 
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 export default function Header() {
-  const firstDescription = reactDescriptions[0];
+  const randomIndex = getRandomInt(reactDescriptions.length);
+  const firstDescription = reactDescriptions[randomIndex];
 
   return (
     <header>
