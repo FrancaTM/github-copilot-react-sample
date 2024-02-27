@@ -5,26 +5,15 @@ import Header from './components/Header/Header.jsx';
 import CoreConcept from './components/CoreConcept.jsx';
 import TabButton from './components/TabButton.jsx';
 import Footer from './components/Footer.jsx';
+import TabContent from './components/TabContent.jsx'; // new component
+
+const topics = ['components', 'jsx', 'props', 'state']; // new constant
 
 function App() {
   const [selectedTopic, setSelectedTopic] = useState();
 
-  function handleSelect(topic) {
-    setSelectedTopic(topic);
-  }
-
-  let tabContent = <p>Please select a topic.</p>;
-
-  if (selectedTopic) {
-    tabContent = (
-      <div id="tab-content">
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>{EXAMPLES[selectedTopic].code}</code>
-        </pre>
-      </div>
-    );
+  function handleSelect(selectedButton) {
+    setSelectedTopic(selectedButton);
   }
 
   return (
@@ -47,32 +36,17 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton
-              isSelected={selectedTopic === 'components'}
-              onSelect={() => handleSelect('components')}
-            >
-              Components
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === 'jsx'}
-              onSelect={() => handleSelect('jsx')}
-            >
-              JSX
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === 'props'}
-              onSelect={() => handleSelect('props')}
-            >
-              Props
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === 'state'}
-              onSelect={() => handleSelect('state')}
-            >
-              State
-            </TabButton>
+            {topics.map((topic) => (
+              <TabButton
+                key={topic}
+                isSelected={selectedTopic === topic}
+                onSelect={() => handleSelect(topic)}
+              >
+                {topic.charAt(0).toUpperCase() + topic.slice(1)}
+              </TabButton>
+            ))}
           </menu>
-          {tabContent}
+          <TabContent selectedTopic={selectedTopic} /> {/* new component */}
         </section>
       </main>
       <Footer />
